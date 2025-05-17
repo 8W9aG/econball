@@ -17,7 +17,7 @@ def _get_fred_client() -> Fred:
     return _FRED_CLIENT
 
 
-def pull(series: str) -> pd.Series:
+def pull(series: str) -> list[pd.Series]:
     """Pull the FRED economic data."""
     logging.info("Pulling FRED series %s", series)
     series_name = "FRED_" + series
@@ -26,7 +26,9 @@ def pull(series: str) -> pd.Series:
         df = client.get_series_all_releases(series)
     except ValueError:
         df = client.get_series(series)
-        return df.rename(series_name)
+        df.index = df.index.date  # type: ignore
+        df = df.sort_index()
+        return [df.rename(series_name)]
     df["date"] = pd.to_datetime(df["date"])
     df["realtime_start"] = pd.to_datetime(df["realtime_start"])
 
@@ -34,4 +36,7 @@ def pull(series: str) -> pd.Series:
         return group[group["realtime_start"] == group["realtime_start"].max()]
 
     df = df.groupby("date").apply(select_latest)
-    return df.set_index("date")["value"].rename(series_name)
+    df = df.set_index("date")
+    df.index = df.index.date  # type: ignore
+    df = df.sort_index()
+    return [df["value"].rename(series_name)]

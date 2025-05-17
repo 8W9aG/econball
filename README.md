@@ -14,6 +14,7 @@ Python 3.11.6:
 - [pyarrow](https://arrow.apache.org/docs/python/index.html)
 - [fredapi](https://pandas.pydata.org/)
 - [tqdm](https://github.com/tqdm/tqdm)
+- [yfinance](https://ranaroussi.github.io/yfinance/)
 
 ## Raison D'être :thought_balloon:
 

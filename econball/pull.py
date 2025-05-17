@@ -8,6 +8,7 @@ import tqdm
 
 from .data import Data
 from .fred import pull as fred_pull
+from .yfinance import pull as yfinance_pull
 
 _DEFAULT_MANIFEST = {
     str(Data.FRED): {
@@ -27,10 +28,14 @@ _DEFAULT_MANIFEST = {
         "IUDSOIA": True,  # Daily Sterling Overnight Index Average (SONIA) Rate
         "BBKMGDP": True,  # Brave-Butters-Kelley Real Gross Domestic Product
         "ECBDFR": True,  # ECB Deposit Facility Rate for Euro Area
-    }
+    },
+    str(Data.YFINANCE): {
+        "MSFT": True,  # Microsoft
+    },
 }
 _DATA_PROVIDERS = {
     str(Data.FRED): fred_pull,
+    str(Data.YFINANCE): yfinance_pull,
 }
 
 
@@ -44,5 +49,7 @@ def pull(manifest: dict[str, dict[str, Any]] | None = None) -> pd.DataFrame:
         for k, v in _DEFAULT_MANIFEST.items():
             futures.extend([executor.submit(_DATA_PROVIDERS[k], x) for x in v])
         for future in tqdm.tqdm(as_completed(futures), desc="Downloading"):
-            series_pool.append(future.result())
-    return pd.concat(series_pool, axis=1).asfreq("D", method="ffill").ffill()
+            series_pool.extend(future.result())
+    return (
+        pd.concat(series_pool, axis=1).sort_index().asfreq("D", method="ffill").ffill()
+    )

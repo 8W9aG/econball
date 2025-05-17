@@ -7,3 +7,4 @@ class Data(StrEnum):
     """Data enumeration."""
 
     FRED = auto()
+    YFINANCE = auto()
