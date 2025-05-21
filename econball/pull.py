@@ -6,6 +6,7 @@ from typing import Any
 import pandas as pd
 import tqdm
 
+from .coinbase import pull as coinbase_pull
 from .data import Data
 from .fred import pull as fred_pull
 from .yfinance import pull as yfinance_pull
@@ -31,11 +32,16 @@ _DEFAULT_MANIFEST = {
     },
     str(Data.YFINANCE): {
         "MSFT": True,  # Microsoft
+        "NVDA": True,  # NVIDIA
+    },
+    str(Data.COINBASE): {
+        "BTC-USD": True,  # Bitcoin
     },
 }
 _DATA_PROVIDERS = {
     str(Data.FRED): fred_pull,
     str(Data.YFINANCE): yfinance_pull,
+    str(Data.COINBASE): coinbase_pull,
 }
 
 

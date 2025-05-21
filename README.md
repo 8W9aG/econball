@@ -15,6 +15,7 @@ Python 3.11.6:
 - [fredapi](https://pandas.pydata.org/)
 - [tqdm](https://github.com/tqdm/tqdm)
 - [yfinance](https://ranaroussi.github.io/yfinance/)
+- [cbhist](https://github.com/8W9aG/cbhist)
 
 ## Raison D'être :thought_balloon:
 

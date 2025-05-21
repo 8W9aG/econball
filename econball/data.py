@@ -8,3 +8,4 @@ class Data(StrEnum):
 
     FRED = auto()
     YFINANCE = auto()
+    COINBASE = auto()
