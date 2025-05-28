@@ -63,4 +63,5 @@ def pull(
     df = pd.concat(series_pool, axis=1).sort_index().asfreq("D", method="ffill").ffill()
     if min_date is not None:
         df = df[df.index.date >= min_date]  # type: ignore
+    df = df[df.index.date < datetime.datetime.today().date()]  # type: ignore
     return df
