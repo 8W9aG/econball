@@ -1,5 +1,6 @@
 """The pull function for fetching the economic data."""
 
+import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 
@@ -45,7 +46,10 @@ _DATA_PROVIDERS = {
 }
 
 
-def pull(manifest: dict[str, dict[str, Any]] | None = None) -> pd.DataFrame:
+def pull(
+    manifest: dict[str, dict[str, Any]] | None = None,
+    min_date: datetime.date | None = None,
+) -> pd.DataFrame:
     """Pull the latest economic data."""
     if manifest is None:
         manifest = _DEFAULT_MANIFEST
@@ -56,6 +60,6 @@ def pull(manifest: dict[str, dict[str, Any]] | None = None) -> pd.DataFrame:
             futures.extend([executor.submit(_DATA_PROVIDERS[k], x) for x in v])
         for future in tqdm.tqdm(as_completed(futures), desc="Downloading"):
             series_pool.extend(future.result())
-    return (
-        pd.concat(series_pool, axis=1).sort_index().asfreq("D", method="ffill").ffill()
-    )
+    df = pd.concat(series_pool, axis=1).sort_index().asfreq("D", method="ffill").ffill()
+    df = df[df.index >= min_date]
+    return df

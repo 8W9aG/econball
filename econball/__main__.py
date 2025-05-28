@@ -21,7 +21,7 @@ def main() -> None:
 
     logging.info("--- econball %s ---", __VERSION__)
 
-    df = pull()
+    df = pull(min_date=args.min_date)
     logging.info(df)
 
     handle = io.BytesIO()
