@@ -6,9 +6,9 @@ import datetime
 STDOUT_FILE = "-"
 
 
-def _valid_date(s: str) -> datetime.datetime:
+def _valid_date(s: str) -> datetime.date:
     try:
-        return datetime.datetime.strptime(s, "%Y-%m-%d")
+        return datetime.datetime.strptime(s, "%Y-%m-%d").date()
     except ValueError as exc:
         raise argparse.ArgumentTypeError(f"not a valid date: {s!r}") from exc
 

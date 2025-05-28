@@ -62,5 +62,5 @@ def pull(
             series_pool.extend(future.result())
     df = pd.concat(series_pool, axis=1).sort_index().asfreq("D", method="ffill").ffill()
     if min_date is not None:
-        df = df[df.index >= min_date]
+        df = df[df.index.date >= min_date]  # type: ignore
     return df
