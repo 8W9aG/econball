@@ -61,5 +61,6 @@ def pull(
         for future in tqdm.tqdm(as_completed(futures), desc="Downloading"):
             series_pool.extend(future.result())
     df = pd.concat(series_pool, axis=1).sort_index().asfreq("D", method="ffill").ffill()
-    df = df[df.index >= min_date]
+    if min_date is not None:
+        df = df[df.index >= min_date]
     return df
