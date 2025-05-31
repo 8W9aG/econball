@@ -14,8 +14,12 @@ Python 3.11.6:
 - [pyarrow](https://arrow.apache.org/docs/python/index.html)
 - [fredapi](https://pandas.pydata.org/)
 - [tqdm](https://github.com/tqdm/tqdm)
+- [python-dotenv](https://saurabh-kumar.com/python-dotenv/)
 - [yfinance](https://ranaroussi.github.io/yfinance/)
 - [cbhist](https://github.com/8W9aG/cbhist)
+- [beautifulsoup](https://www.crummy.com/software/BeautifulSoup/)
+- [lxml](https://lxml.de/)
+- [requests-cache](https://requests-cache.readthedocs.io/en/stable/)
 
 ## Raison D'être :thought_balloon:
 
@@ -23,7 +27,12 @@ Python 3.11.6:
 
 ## Architecture :triangular_ruler:
 
-`econball` is a functional library which simply aims to pull down and normalise as much economic data as possible. Within it there are different pullers for various forms of economic data, all outputting a single time series representing the entity.
+`econball` is a functional library which simply aims to pull down and normalise as much economic data as possible. Within it there are different pullers for various forms of economic data, all outputting a single time series representing the entity. The data that it pulls down is:
+
+1. FRED: Macroeconomic Signals
+2. YFinance: Equity Tickers
+3. Coinbase: Crypto Tickers
+4. EFD: Senate Trades
 
 ## Installation :inbox_tray:
 

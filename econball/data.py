@@ -1,4 +1,4 @@
-"""An enumeration for the different data soruces in econball."""
+"""An enumeration for the different data sources in econball."""
 
 from enum import StrEnum, auto
 
@@ -9,3 +9,4 @@ class Data(StrEnum):
     FRED = auto()
     YFINANCE = auto()
     COINBASE = auto()
+    EFD = auto()

@@ -1,13 +1,14 @@
 """A puller for yahoo finance data."""
 
-# pylint: disable=global-statement
+# pylint: disable=global-statement,unused-argument
 import logging
 
 import pandas as pd
 import yfinance as yf  # type: ignore
+from requests_cache.session import CachedSession
 
 
-def pull(series: str) -> list[pd.Series]:
+def pull(series: str, session: CachedSession) -> list[pd.Series]:
     """Pull the yfinance data."""
     logging.info("Pulling yfinance series %s", series)
     series_name = "yfinance_" + series

@@ -5,10 +5,13 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 
 import pandas as pd
+import requests_cache
 import tqdm
+from requests_cache.session import CachedSession
 
 from .coinbase import pull as coinbase_pull
 from .data import Data
+from .efd import pull as efd_pull
 from .fred import pull as fred_pull
 from .yfinance import pull as yfinance_pull
 
@@ -30,34 +33,50 @@ _DEFAULT_MANIFEST = {
         "IUDSOIA": True,  # Daily Sterling Overnight Index Average (SONIA) Rate
         "BBKMGDP": True,  # Brave-Butters-Kelley Real Gross Domestic Product
         "ECBDFR": True,  # ECB Deposit Facility Rate for Euro Area
+        "ECBESTRTOTVOL": True,  # Euro Short-Term Rate: Total Volume
     },
     str(Data.YFINANCE): {
         "MSFT": True,  # Microsoft
         "NVDA": True,  # NVIDIA
+        "F": True,  # Ford
+        "AAPL": True,  # Apple
     },
     str(Data.COINBASE): {
         "BTC-USD": True,  # Bitcoin
+        "XRP-USD": True,  # Ripple
+    },
+    str(Data.EFD): {
+        "AAPL": True,  # Apple Senate Trades
     },
 }
 _DATA_PROVIDERS = {
     str(Data.FRED): fred_pull,
     str(Data.YFINANCE): yfinance_pull,
     str(Data.COINBASE): coinbase_pull,
+    str(Data.EFD): efd_pull,
 }
 
 
 def pull(
     manifest: dict[str, dict[str, Any]] | None = None,
     min_date: datetime.date | None = None,
+    session: CachedSession | None = None,
 ) -> pd.DataFrame:
     """Pull the latest economic data."""
     if manifest is None:
         manifest = _DEFAULT_MANIFEST
+    if session is None:
+        session = CachedSession(
+            "econball",
+            expire_after=requests_cache.NEVER_EXPIRE,
+            allowable_methods=("GET", "HEAD", "POST"),
+            stale_if_error=True,
+        )
     series_pool = []
     with ThreadPoolExecutor() as executor:
         futures = []
         for k, v in _DEFAULT_MANIFEST.items():
-            futures.extend([executor.submit(_DATA_PROVIDERS[k], x) for x in v])
+            futures.extend([executor.submit(_DATA_PROVIDERS[k], x, session) for x in v])
         for future in tqdm.tqdm(as_completed(futures), desc="Downloading"):
             series_pool.extend(future.result())
     df = pd.concat(series_pool, axis=1).sort_index().asfreq("D", method="ffill").ffill()

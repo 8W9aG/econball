@@ -1,11 +1,12 @@
 """A puller for FRED data."""
 
-# pylint: disable=global-statement
+# pylint: disable=global-statement,unused-argument
 import logging
 import os
 
 import pandas as pd
 from fredapi import Fred  # type: ignore
+from requests_cache.session import CachedSession
 
 _FRED_CLIENT = None
 
@@ -17,7 +18,7 @@ def _get_fred_client() -> Fred:
     return _FRED_CLIENT
 
 
-def pull(series: str) -> list[pd.Series]:
+def pull(series: str, session: CachedSession) -> list[pd.Series]:
     """Pull the FRED economic data."""
     logging.info("Pulling FRED series %s", series)
     series_name = "FRED_" + series
