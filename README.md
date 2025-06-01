@@ -20,6 +20,7 @@ Python 3.11.6:
 - [beautifulsoup](https://www.crummy.com/software/BeautifulSoup/)
 - [lxml](https://lxml.de/)
 - [requests-cache](https://requests-cache.readthedocs.io/en/stable/)
+- [python-dateutil](https://github.com/dateutil/dateutil)
 
 ## Raison D'être :thought_balloon:
 

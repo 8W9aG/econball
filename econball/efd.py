@@ -9,6 +9,7 @@ from urllib.parse import urlparse
 
 import pandas as pd
 from bs4 import BeautifulSoup
+from dateutil import parser
 from requests_cache.session import CachedSession
 
 _EFD_DATA = None
@@ -103,11 +104,20 @@ def _fetch_efd_date(
             dfs = pd.read_html(handle)
             df = dfs[0]
 
+            soup = BeautifulSoup(response.text, "lxml")
+            filed_date = None
+            for h1 in soup.find_all("h1"):
+                filed_date = parser.parse(
+                    h1.get_text().strip().split("(")[0].strip().split()[-1]
+                )
+            if filed_date is None:
+                raise ValueError("filed_date is null")
+
             for _, row in df.iterrows():
                 ticker = row["Ticker"]
                 if "--" in ticker:
                     continue
-                date = row["Transaction Date"]
+                date = str(filed_date)
                 amount = float(
                     row["Amount"]
                     .split("-")[0]

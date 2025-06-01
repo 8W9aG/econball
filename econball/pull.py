@@ -35,6 +35,7 @@ _DEFAULT_MANIFEST = {
         "ECBDFR": True,  # ECB Deposit Facility Rate for Euro Area
         "ECBESTRTOTVOL": True,  # Euro Short-Term Rate: Total Volume
         "DFEDTARL": True,  # Federal Funds Target Range - Lower Limit
+        "CORESTICKM159SFRBATL": True,  # Sticky Price Consumer Price Index less Food and Energy
     },
     str(Data.YFINANCE): {
         # Equities
@@ -44,17 +45,23 @@ _DEFAULT_MANIFEST = {
         "AAPL": True,  # Apple
         "LCID": True,  # Lucid Group, Inc
         "AMZN": True,  # Amazon
+        "PLTR": True,  # Palantir
         # Forex
         "EURUSD=X": True,  # Euro to USD
+        "JPY=X": True,  # Yen to USD
+        # Futures
+        "ES=F": True,  # E-Mini S&P 500
     },
     str(Data.COINBASE): {
         "BTC-USD": True,  # Bitcoin
         "XRP-USD": True,  # Ripple
         "ETH-USD": True,  # Ethereum
+        "USDT-USD": True,  # Tether
     },
     str(Data.EFD): {
         "AAPL": True,  # Apple Senate Trades
         "MSFT": True,  # Microsoft Senate Trades
+        "NVDA": True,  # Nvidia Senate Trades
     },
 }
 _DATA_PROVIDERS = {
