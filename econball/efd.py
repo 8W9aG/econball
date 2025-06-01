@@ -125,7 +125,6 @@ def _fetch_efd_date(
                     raise ValueError(
                         f"Unrecognised interaction type: {interaction_type}"
                     )
-                print(f"Found trade: {ticker} {date} {amount} {trade_interaction_type}")
                 timeline = traded_assets.get(ticker, {})
                 trades = timeline.get(date, [])
                 trades.append({"amount": amount, "interaction": trade_interaction_type})

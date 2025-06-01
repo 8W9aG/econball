@@ -34,19 +34,27 @@ _DEFAULT_MANIFEST = {
         "BBKMGDP": True,  # Brave-Butters-Kelley Real Gross Domestic Product
         "ECBDFR": True,  # ECB Deposit Facility Rate for Euro Area
         "ECBESTRTOTVOL": True,  # Euro Short-Term Rate: Total Volume
+        "DFEDTARL": True,  # Federal Funds Target Range - Lower Limit
     },
     str(Data.YFINANCE): {
+        # Equities
         "MSFT": True,  # Microsoft
         "NVDA": True,  # NVIDIA
         "F": True,  # Ford
         "AAPL": True,  # Apple
+        "LCID": True,  # Lucid Group, Inc
+        "AMZN": True,  # Amazon
+        # Forex
+        "EURUSD=X": True,  # Euro to USD
     },
     str(Data.COINBASE): {
         "BTC-USD": True,  # Bitcoin
         "XRP-USD": True,  # Ripple
+        "ETH-USD": True,  # Ethereum
     },
     str(Data.EFD): {
         "AAPL": True,  # Apple Senate Trades
+        "MSFT": True,  # Microsoft Senate Trades
     },
 }
 _DATA_PROVIDERS = {

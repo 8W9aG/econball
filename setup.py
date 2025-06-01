@@ -23,7 +23,7 @@ def install_requires() -> typing.List[str]:
 
 setup(
     name='econball',
-    version='0.0.8',
+    version='0.0.9',
     description='A library for pulling in and normalising economic data.',
     long_description=long_description,
     long_description_content_type='text/markdown',
