@@ -1,5 +1,6 @@
 """The pull function for fetching the economic data."""
 
+# pylint: disable=line-too-long
 import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
@@ -36,6 +37,7 @@ _DEFAULT_MANIFEST = {
         "ECBESTRTOTVOL": True,  # Euro Short-Term Rate: Total Volume
         "DFEDTARL": True,  # Federal Funds Target Range - Lower Limit
         "CORESTICKM159SFRBATL": True,  # Sticky Price Consumer Price Index less Food and Energy
+        "CPIAUCSL": True,  # Consumer Price Index for All Urban Consumers: All Items in U.S. City Average
     },
     str(Data.YFINANCE): {
         # Equities
@@ -46,22 +48,28 @@ _DEFAULT_MANIFEST = {
         "LCID": True,  # Lucid Group, Inc
         "AMZN": True,  # Amazon
         "PLTR": True,  # Palantir
+        "APLD": True,  # Applied Digital Corporation
+        "GOOG": True,  # Alphabet
         # Forex
         "EURUSD=X": True,  # Euro to USD
         "JPY=X": True,  # Yen to USD
+        "GBPUSD=X": True,  # Sterling to USD
         # Futures
         "ES=F": True,  # E-Mini S&P 500
+        "YM=F": True,  # Mini Dow Jones Indus.-$5 Jun 25
     },
     str(Data.COINBASE): {
         "BTC-USD": True,  # Bitcoin
         "XRP-USD": True,  # Ripple
         "ETH-USD": True,  # Ethereum
         "USDT-USD": True,  # Tether
+        "BNB-USD": True,  # Binance Coin
     },
     str(Data.EFD): {
         "AAPL": True,  # Apple Senate Trades
         "MSFT": True,  # Microsoft Senate Trades
         "NVDA": True,  # Nvidia Senate Trades
+        "F": True,  # Ford Senate Trades
     },
 }
 _DATA_PROVIDERS = {
