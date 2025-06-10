@@ -21,6 +21,7 @@ Python 3.11.6:
 - [lxml](https://lxml.de/)
 - [requests-cache](https://requests-cache.readthedocs.io/en/stable/)
 - [python-dateutil](https://github.com/dateutil/dateutil)
+- [pandasdmx](https://pandasdmx.readthedocs.io/en/v1.0/)
 
 ## Raison D'être :thought_balloon:
 
@@ -34,6 +35,7 @@ Python 3.11.6:
 2. YFinance: Equity Tickers
 3. Coinbase: Crypto Tickers
 4. EFD: Senate Trades
+5. OECD
 
 ## Installation :inbox_tray:
 

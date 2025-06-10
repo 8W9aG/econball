@@ -10,3 +10,4 @@ class Data(StrEnum):
     YFINANCE = auto()
     COINBASE = auto()
     EFD = auto()
+    OECD = auto()
