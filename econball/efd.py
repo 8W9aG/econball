@@ -156,7 +156,9 @@ def pull(series: str, session: CachedSession) -> list[pd.Series]:
     """Pull the EFD data."""
     logging.info("Pulling EFD series %s", series)
     data = _fetch_efd_date(session)
-    ticker = data[series]
+    ticker = data.get(series)
+    if ticker is None:
+        return []
     actions = set()
     for value in ticker.values():
         for trade in value:
