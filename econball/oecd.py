@@ -1,6 +1,6 @@
 """A puller for OECD data using pandasdmx."""
 
-# pylint: disable=unused-argument,line-too-long,unnecessary-lambda
+# pylint: disable=unused-argument,line-too-long,unnecessary-lambda,too-many-locals
 import logging
 from typing import List
 
@@ -41,12 +41,16 @@ def pull(series: str, session: CachedSession) -> List[pd.Series]:
         observations = dataset_series[dataset_key]["observations"]
         observation_keys = sorted(observations.keys(), key=lambda x: int(x))
 
-        series_list.append(
-            pd.Series(
-                name="_".join([series, names[count]]),
-                data=[float(observations[x][0]) for x in observation_keys],
-                index=ts_index,
+        try:
+            series_list.append(
+                pd.Series(
+                    name="_".join([series, names[count]]),
+                    data=[float(observations[x][0]) for x in observation_keys],
+                    index=ts_index,
+                )
             )
-        )
+        except ValueError as exc:
+            logging.warning(str(exc))
+            logging.warning("Failed to process %s", series)
 
     return series_list

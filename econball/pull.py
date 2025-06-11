@@ -62,7 +62,7 @@ _DEFAULT_MANIFEST = {
         "INTC": True,  # Intel Corporation
         "AVGO": True,  # Broadcom
         "GRAB": True,  # Grab Holdings Limited
-        "TSMC": True,  # Taiwan Semiconductor Manufacturing Company
+        "TSM": True,  # Taiwan Semiconductor Manufacturing Company
         # Forex
         "EURUSD=X": True,  # Euro to USD
         "JPY=X": True,  # Yen to USD
@@ -87,7 +87,7 @@ _DEFAULT_MANIFEST = {
         "SOL-USD": True,  # Solana
         # "USDC-USD": True,  # USDC
         "DOGE-USD": True,  # DOGE
-        "TRX-USD": True,  # TRON
+        # "TRX-USD": True,  # TRON
         "ADA-USD": True,  # Cardano
     },
     str(Data.EFD): {
