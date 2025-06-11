@@ -41,6 +41,8 @@ _DEFAULT_MANIFEST = {
         "CPIAUCSL": True,  # Consumer Price Index for All Urban Consumers: All Items in U.S. City Average
         "GDPC1": True,  # Real Gross Domestic Product
         "MEDCPIM158SFRBCLE": True,  # Median Consumer Price Index
+        "USACPALTT01CTGYM": True,  # Consumer Price Indices (CPIs, HICPs), COICOP 1999: Consumer Price Index: Total for United States
+        "CPALTT01USM657N": True,  # Consumer Price Index: All Items: Total for United States
     },
     str(Data.YFINANCE): {
         # Equities
@@ -57,17 +59,25 @@ _DEFAULT_MANIFEST = {
         "META": True,  # Meta
         "WBD": True,  # Warner Bros. Discovery, Inc.
         "2222.SR": True,  # Saudi Arabian Oil Company
+        "INTC": True,  # Intel Corporation
+        "AVGO": True,  # Broadcom
+        "GRAB": True,  # Grab Holdings Limited
+        "TSMC": True,  # Taiwan Semiconductor Manufacturing Company
         # Forex
         "EURUSD=X": True,  # Euro to USD
         "JPY=X": True,  # Yen to USD
         "GBPUSD=X": True,  # Sterling to USD
         "AUDUSD=X": True,  # AUD to USD
         "NZDUSD=X": True,  # NZD to USD
+        "EURJPY=X": True,  # Euro to Yen
+        "GBPJPY=X": True,  # Sterling to Yen
         # Futures
         "ES=F": True,  # E-Mini S&P 500
         "YM=F": True,  # Mini Dow Jones
         "NQ=F": True,  # Nasdaq 100
         "RTY=F": True,  # E-mini Russell 2000
+        "ZB=F": True,  # U.S. Treasury Bond Futures
+        "ZN=F": True,  # 10-Year T-Note Futures
     },
     str(Data.COINBASE): {
         "BTC-USD": True,  # Bitcoin
@@ -77,6 +87,8 @@ _DEFAULT_MANIFEST = {
         "SOL-USD": True,  # Solana
         # "USDC-USD": True,  # USDC
         "DOGE-USD": True,  # DOGE
+        "TRX-USD": True,  # TRON
+        "ADA-USD": True,  # Cardano
     },
     str(Data.EFD): {
         "AAPL": True,  # Apple Senate Trades
@@ -85,9 +97,13 @@ _DEFAULT_MANIFEST = {
         "F": True,  # Ford Senate Trades
         "LCID": True,  # Lucid Group, Inc
         "AMZN": True,  # Amazon
+        "PLTR": True,  # Palantir
+        "APLD": True,  # Applied Digital Corporation
     },
     str(Data.OECD): {
         "OECD.TAD.ATM,DSD_AGR@DF_OUTLOOK_2021_2030,1.0/NOR.A.CPC_0141...": True,  # Agricultural Outlook Norway Soy Beans
+        "OECD.TAD.ATM,DSD_AGR@DF_OUTLOOK_2021_2030,1.0/AUS.A.CPC_0141...": True,  # Agricultural Outlook Australia Soy Beans
+        "OECD.TAD.ATM,DSD_AGR@DF_OUTLOOK_2021_2030,1.0/CAN.A.CPC_0141...": True,  # Agricultural Outlook Canada Soy Beans
     },
 }
 _DATA_PROVIDERS = {
